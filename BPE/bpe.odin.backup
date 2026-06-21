@@ -34,29 +34,38 @@ main :: proc() {
     pairs := make(map[string]int)
 
     // grouping with byte-pairs:
-    next_rune: for _char, i in data {
-        if (i % 2 == 0) {
-            // test: fmt.println("pair: ", _char, "|",rune(data[i+1])) // pair: T | h
-            _l: rune // _char
-            _r: rune // rune(data[i+1])
+    // next_rune: for _char, i in data {
+    //     if (i % 2 == 0) {
+    //         // test: fmt.println("pair: ", _char, "|",rune(data[i+1])) // pair: T | h
+    //         _l: rune // _char
+    //         _r: rune // rune(data[i+1])
+    //
+    //         if i+1 < len(data) {
+    //             _l = _char
+    //             _r = rune(data[i+1])
+    //         } else {
+    //             _l = _char
+    //             _r =0
+    //         }
+    //
+    //         _pair_, _ := utf8.runes_to_string([]rune{_l,_r})
+    //         if _, exists := pairs[_pair_]; exists {
+    //             pairs[_pair_] += 1
+    //         } else {
+    //             pairs[_pair_] = 1
+    //         }
+    //      } else {
+    //         continue next_rune
+    //     }
+    // }
 
-            if i+1 < len(data) {
-                _l = _char
-                _r = rune(data[i+1])
-            } else {
-                _l = _char
-                _r =0
-            }
-
-            _pair_, _ := utf8.runes_to_string([]rune{_l,_r})
-            if _, exists := pairs[_pair_]; exists {
-                pairs[_pair_] += 1
-            } else {
-                pairs[_pair_] = 1
-            }
-         } else {
-            continue next_rune
+    for _, i in data {
+        if i+1 >= len(data) {
+            break
         }
+
+        pair := data[i:i+2]
+        pairs[pair] += 1
     }
 
     pairs_slice := make([]Pair, len(pairs))
