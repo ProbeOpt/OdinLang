@@ -86,16 +86,22 @@ main :: proc() {
         if x.value > 1 && _has_more { // only do it, if it occured MORE then 1 times, and only if unused runes has more!
             ref_table[x.key], _has_more = get_new_identifier()
             // test: fmt.println(x.key, " -> ", ref_table[x.key])
-            // replace all occurence of KEY to NEW_IDENT in data.
         }
     }
 
-    for x, y in ref_table {
-        fmt.println(x, "->", y)
-        strings.replace(data, x, y, -1)
-    }
+    // replacing things with things!
+    new_data := data
 
-    fmt.println(data)
+    again: for x, y in ref_table {
+        // test: fmt.println(x, "->", y)
+        // Capture both return values: the new string and the allocation flag
+        new_data, _ = strings.replace(new_data, x, y, -1)
+        continue again
+    }
+    // test: fmt.println(new_data) // finally, BPE words, thank god!
+    compressed_percentage := f64( int( len(new_data) ) / int( len(data) ) )
+    fmt.println(" actual size: ",len(data)," | compresses size: ", len(new_data), " | compressed percentage: ", f64(compressed_percentage))
+    fmt.println(new_data)
 
     //// # THIS WAS A SIDE DISTRACTION I GOT, A SMALL PREDICTION MODEL, NEVERMIND.
     //// <SUPPORTS ONLY WORK WORDS>
@@ -131,7 +137,10 @@ main :: proc() {
 
 //--// encoding //--//
 ident_i := 0
-unused_runes := []rune{'Z'}
+unused_runes :=  []rune{
+    '!', '@', '#', '$', '%', '^', '&', '*', '(', ')'
+}   // using chinese, since no one uses them in text.
+
 get_new_identifier :: proc() -> (string, bool) {
     if ident_i < len(unused_runes) {
         ident_i += 1
