@@ -1,0 +1,134 @@
+gotermx Help
+
+  M-x      Command palette       M-d      Toggle dired (M-x set-pwd)
+  M-t      Toggle terminal       M-e      Toggle code editor
+  M-w      Copy selection         M-W      Cut selection
+  M-y      Paste clipboard
+  (no welcome screen — clean startup)
+
+  ── C-x Prefix ──────────────────────────────────────────────────
+  C-f      Find file (create)     C-d      Open dir in dired
+  C-t      New terminal split     C-w      Close pane
+  C-e      Exec shell cmd         C-c      Copy selection
+  C-x      Cut selection          C-v      Paste clipboard
+  1        Focus only pane        0        Kill pane
+  o        Focus other pane       r        Resize splits
+  p        Dired cd here          n        New file
+  N        New directory          d        Delete (confirm)
+  R        Rename selected        f        Filter dired files
+  ←/→      Adjust split           C-g      Stop all plugins
+  C-z      Plugin prompt (C-x C-z)
+
+  ── Editor ──────────────────────────────────────────────────────
+   C-s      Save file             C-o      New buffer
+  C-f      Find (highlights all) C-r      Find & Replace
+  C-g      Goto line             ↑/↓      Nav search matches
+  Enter    Replace mode: first Enter confirms find + jumps to 1st match,
+           type replacement, Enter replaces and advances to next
+  C-h      Replace all           Esc      Exit replace / clear selection
+  C-n/C-p  Next/prev line        C-a      Select all
+  C-e      Line end              C-k      Kill line
+  C-w      Close buffer          C-d      Delete forward
+  C-v      Page down             Tab      Indent (with sel)
+  S-Tab    Previous buffer       S-arrows Extend selection
+  C-Space  Set selection mark    M-w      Copy to clipboard
+  M-W      Cut selection         M-y      Paste clipboard
+  C-z      Undo                  C-y      Redo
+  M-/      Fuzzy autocomplete    ↑↓  Navigate completions
+  M-←      Strip leading+trailing ws  M-↑/↓   Move line up/down
+  M-k      Delete line
+  C-←/→    Word left/right       C-↑/↓    5 lines up/down
+  S-C-←/→  Select word           S-C-↑/↓  Select 5 lines
+  Selection auto-clears on non-Shift movement (arrows, Home/End, PgUp/Dn)
+
+  ── Editor Micro Splits ─────────────────────────────────────────
+  M-z v    Vertical split        M-z h    Horizontal split
+  M-z r    Resize mode           ←/→/↑/↓ Adjust boundary
+  M-z c    Close split           M-z o    Switch split
+  M-z t    Toggle orientation    (max 4 splits)
+
+  ── Terminal ────────────────────────────────────────────────────
+  Built-in PTY-based shell with full ANSI support.
+  Hidden by default — C-x t to create; background matches theme.
+  Persistent shell (auto-restarts), up to 3 terminal splits.
+  ↑/↓      Shell history          PgUp/PgDn  Scroll back
+  C-l      Clear screen            C-c      Interrupt
+  C-d      EOF / exit
+
+  ── Terminal Splits ─────────────────────────────────────────────
+  M-z v    Vertical split        M-z h    Horizontal split
+  M-z c    Close split           M-z o    Switch split
+  M-s      Resize mode           ←/→/↑/↓ Adjust boundary
+  (max 3 splits, auto-restart on exit)
+
+  ── File Browser (Dired) ────────────────────────────────────────
+  ls-la style listing in editor buffer. M-d to toggle, C-x C-d to
+  open a specific dir (prompt with auto-create). Sets global PWD.
+  j/k      Move down/up          g/G      Top/bottom
+  Enter    Open file/dir         -/Bksp   Parent directory
+  C-x f    Filter by name        C-x n    New file
+  C-x N    New directory         C-x d    Delete (confirm)
+  C-x R    Rename selected       C-x p    Cd here
+
+  ── Command Split (C-x C-e) ──
+  Run shell command — output streams live (50ms flush ticker,
+  updates continuously even without newlines).
+  Tab completes paths, input has shell syntax highlighting
+  (commands, flags, strings, vars, operators, comments).
+  C-c      Abort running command   C-w/Esc Close output buffer
+  ↑/↓      Scroll output         ←/→/H/E Word-move, line start/end
+
+  ── C-z Plugins ──────────────────────────────────────────────
+  C-x C-z  Plugin prompt (type,↑↓,Tab,Enter)  type n   New plugin buffer
+  C-z      Undo last edit                       C-y      Redo last edit
+  C-x C-g  Stop running plugin          ↑↓/Tab  Navigate/complete
+
+  ── Plugins ─────────────────────────────────────────────────────────
+  M-x list-plugins  Plugin Manager   C-x C-g  Stop all plugins
+  C-x 1  Run selected plugin   C-x 2  Stop selected
+  C-x 3  Toggle favorite        ★  Favorites listed first
+
+  ── Footer Prompts ────────────────────────────────────────────────
+  All prompts and popups appear in the footer bar (Emacs/Vim style).
+  Type in the footer input line; drop-up list shown above.
+  ↑↓ navigate list  Tab/Enter complete  Esc cancel
+  ← →/C-← C-→ Move char/word    Home/End  Line start/end
+  M-p/M-n  Cycle prompt input history      Recent cmds at top of M-x
+  C-x C-e prompt: shell syntax highlighted + path completion (Tab)
+
+  ── Per-Split Footer ─────────────────────────────────────────────
+  Each editor microsplit has its own footer bar:
+  "Line: XXXX Col: XXXX    (LangName: .ext)"
+  Language name detected from syntax highlighting by extension.
+  Msg bar flashes OkText for 3s, then reverts to muted gray.
+  M-x toggle-scroll-mode  Switch between 1-line and 12-line scroll
+  M-x set-tab-width       Set Tab width (spaces)
+
+  ── Multi-Cursor (Emacs-style) ─────────────────────────────────
+  C-x C-SPC  Mark next occurrence         C-x C-n    Mark all occurrences
+  C-x RET    Toggle multi-edit mode       C-x Esc    Clear all cursors
+  (Arrow keys, Home/End move all cursors in parallel. Edit any, edits all.)
+
+  ── AI Plugin (ai.lua) ──────────────────────────────────────────
+  M-x run-plugin  Select "ai" to start Ollama chat
+  Select a model, then type messages in the footer prompt.
+  AI can execute bash commands via RUN_BASH: <cmd> pattern.
+  Streaming output auto-wraps within editor width.
+  Requires: Ollama running at http://localhost:11434
+
+  ── Plugin API (Lua) ────────────────────────────────────────────
+  editor.append_text  Append to buffer    editor.width  Get editor width
+  streamToken(token)  Append with word wrap   http.get/post  HTTP reqs
+  json.encode/decode  JSON utils         All plugins in ~/.config/goterm/plugins/
+
+  ── Reloading Config ─────────────────────────────────────────────
+  M-x reload-syntax       Reload .syntax files from disk
+  M-x reload-theme        Reload .theme files from disk
+  M-x reload-plugins      Reload plugins from disk
+  M-x find-plugins        Scan dirs and load new plugins
+
+  ── Themes (14 built-in) ────────────────────────────────────────
+  GHDark, Monokai, Nord, OneDark, SolarizedDark, Catppuccin,
+  Dracula, Gruvbox, AyuDark, TokyoNight, RosePine, SoftWarm,
+  VibrantDark, DeepPurple
+  SynSearch fg:#000000 bg:#ffff00    (add to any .theme file)
