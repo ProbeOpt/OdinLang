@@ -1,0 +1,9 @@
+;; Compute 5! = 120
+mov ecx, $5
+mov eax, $1
+loop:
+    mul eax, ecx
+    dec ecx
+    jg loop
+print eax
+halt

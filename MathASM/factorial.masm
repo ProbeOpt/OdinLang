@@ -1,0 +1,16 @@
+jmp main
+
+factorial:
+    pop ecx
+    mov eax, $1
+fact_loop:
+    mul eax, ecx
+    dec ecx
+    jg fact_loop
+    ret
+
+main:
+    push $5
+    call factorial
+    print eax      ;; prints 120
+    halt

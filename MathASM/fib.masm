@@ -1,0 +1,8 @@
+mov eax, $0
+mov ecx, $10
+loop:
+    add eax, ecx
+    dec ecx
+    jnz loop
+print eax          ;; prints 55
+halt
